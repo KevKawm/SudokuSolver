@@ -10,7 +10,7 @@ import com.webs.kevkawmcode.SudokuSolver.Display;
 
 public class Selector implements MouseListener {
 
-	int selected = 1;
+	public int selected = 0;
 
 	public Point p;
 	public int length;
@@ -27,7 +27,7 @@ public class Selector implements MouseListener {
 		int size = length / 9;
 		for (int i = 0; i < 9; i++) {
 			BufferedImage img = display.imgs.get(i);
-			if (i == selected) {
+			if (i == selected - 1) {
 				img = display.sImgs.get(i);
 			}
 			g.drawImage(img, p.x + i * size, p.y, size, size, null);
@@ -58,7 +58,7 @@ public class Selector implements MouseListener {
 			for(int i = 0; i < 9; i++){
 				if(e.getPoint().x > p.x + i * size && e.getPoint().x < p.x + (i + 1) * size){
 					if(e.getButton() == 1){
-						selected = i;
+						selected = i + 1;
 					} else if(e.getButton() == 3){
 						selected = 0;
 					}
