@@ -2,12 +2,14 @@ package com.webs.kevkawmcode.SudokuSolver.Solver;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.webs.kevkawmcode.SudokuSolver.Display;
 
-public class Board {
+public class Board implements MouseListener{
 	
 	Display display;
 	
@@ -28,7 +30,7 @@ public class Board {
 		g.setColor(Color.BLACK);
 		int size = display.frame.getHeight() / 12;
 		int xOff = (display.frame.getWidth() - size * 9) / 2;
-		int yOff = (display.frame.getHeight() - size * 10) / 2;
+		int yOff = (display.frame.getHeight() - size * 9) / 4;
 		for(int x = 0; x < 9; x++){
 			for(int y = 0; y < 9; y++){
 				if(board.get(x).get(y) != 0){
@@ -36,6 +38,7 @@ public class Board {
 				}
 				g.drawRect(xOff + x * size, yOff + y * size, size, size);
 				g.fillRect((xOff + 9 * size) - (size / 30), yOff, size / 15, size * 9);
+				g.fillRect(xOff, (yOff + 9 * size) - (size / 30), size * 9, size / 15);
 				if(x % 3 == 0){
 					g.fillRect(xOff + x * size - (size / 30), yOff + y * size, size / 15, size);
 				}
@@ -44,6 +47,26 @@ public class Board {
 				}
 			}
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
 		
 	}
 	
