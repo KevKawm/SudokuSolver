@@ -53,6 +53,7 @@ public class Display extends JPanel implements Runnable{
 		}
 		
 		this.addMouseListener(s);
+		this.addMouseListener(board);
 		
 		while(true){
 			repaint();
