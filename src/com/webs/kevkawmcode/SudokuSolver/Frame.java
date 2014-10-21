@@ -23,6 +23,7 @@ public class Frame extends JFrame {
 		this.setResizable(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
+		this.addKeyListener(display);
 	}
 
 }

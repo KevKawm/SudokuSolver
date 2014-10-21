@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,7 @@ import com.webs.kevkawmcode.SudokuSolver.Solver.Board;
 import com.webs.kevkawmcode.SudokuSolver.Solver.ImageManager;
 import com.webs.kevkawmcode.SudokuSolver.Solver.Selector;
 
-public class Display extends JPanel implements Runnable{
+public class Display extends JPanel implements Runnable, KeyListener{
 	private static final long serialVersionUID = 1L;
 
 	Thread thread = new Thread(this);
@@ -78,6 +80,21 @@ public class Display extends JPanel implements Runnable{
 		g.fillRect(0, 0, frame.getWidth(), frame.getHeight());
 		board.render(g);
 		s.render(g);
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyChar() == 's'){
+			board.solve();
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
 	}
 	
 }

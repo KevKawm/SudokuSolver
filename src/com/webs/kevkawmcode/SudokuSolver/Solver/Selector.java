@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
 
 import com.webs.kevkawmcode.SudokuSolver.Display;
 
@@ -26,7 +25,10 @@ public class Selector implements MouseListener {
 	public void render(Graphics g) {
 		int size = length / 9;
 		for (int i = 0; i < 9; i++) {
-			g.drawImage(i == selected - 1 ? display.sImgs.get(i) : display.imgs.get(i), p.x + i * size, p.y, size, size, null);
+			try{
+				g.drawImage(i == selected - 1 ? display.sImgs.get(i) : display.imgs.get(i), p.x + i * size, p.y, size, size, null);
+			} catch(Exception e){
+			}
 			g.drawRect(p.x + i * size, p.y, size, size);
 		}
 	}

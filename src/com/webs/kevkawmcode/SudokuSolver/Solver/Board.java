@@ -86,4 +86,8 @@ public class Board implements MouseListener{
 		}
 	}
 	
+	public void solve(){
+		
+	}
+	
 }
