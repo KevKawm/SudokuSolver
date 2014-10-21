@@ -2,8 +2,8 @@ package com.webs.kevkawmcode.SudokuSolver;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +28,8 @@ public class Display extends JPanel implements Runnable{
 	int xOff;
 	int yOff;
 	
-	public List<BufferedImage> imgs = new ArrayList<BufferedImage>();
-	public List<BufferedImage> sImgs = new ArrayList<BufferedImage>();
+	public List<Image> imgs = new ArrayList<Image>();
+	public List<Image> sImgs = new ArrayList<Image>();
 	
 	public Display(Frame frame) {
 		this.frame = frame;

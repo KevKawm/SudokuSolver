@@ -26,11 +26,7 @@ public class Selector implements MouseListener {
 	public void render(Graphics g) {
 		int size = length / 9;
 		for (int i = 0; i < 9; i++) {
-			BufferedImage img = display.imgs.get(i);
-			if (i == selected - 1) {
-				img = display.sImgs.get(i);
-			}
-			g.drawImage(img, p.x + i * size, p.y, size, size, null);
+			g.drawImage(i == selected - 1 ? display.sImgs.get(i) : display.imgs.get(i), p.x + i * size, p.y, size, size, null);
 			g.drawRect(p.x + i * size, p.y, size, size);
 		}
 	}
