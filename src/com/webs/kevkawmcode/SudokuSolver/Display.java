@@ -22,7 +22,7 @@ public class Display extends JPanel implements Runnable{
 	
 	Board board;
 	
-	Selector s;
+	public Selector s;
 	
 	int size;
 	int xOff;
