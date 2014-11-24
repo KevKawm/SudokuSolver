@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class Board implements MouseListener{
 	Display display;
 	
 	List<List<Integer>> board = new ArrayList<List<Integer>>();
+	List<String> set = new ArrayList<String>();
 	
 	public Board(Display display){
 		this.display = display;
@@ -35,7 +37,14 @@ public class Board implements MouseListener{
 		for(int x = 0; x < 9; x++){
 			for(int y = 0; y < 9; y++){
 				if(board.get(x).get(y) != 0){
-					g.drawImage(ImageManager.get(board.get(x).get(y).toString()), xOff + x * size, yOff + y * size, size, size, null);
+					if(set.contains(x + "," + y)){
+						BufferedImage img = new BufferedImage(200,200,BufferedImage.TYPE_INT_RGB);
+						img.getGraphics().drawImage(ImageManager.get(board.get(x).get(y).toString()), 0, 0, null);
+						ImageManager.replaceColor(Color.BLACK.getRGB(), Color.RED.getRGB(), img);
+						g.drawImage(img, xOff + x * size, yOff + y * size, size, size, null);
+					} else {
+						g.drawImage(ImageManager.get(board.get(x).get(y).toString()), xOff + x * size, yOff + y * size, size, size, null);
+					}
 				}
 				g.drawRect(xOff + x * size, yOff + y * size, size, size);
 				g.fillRect((xOff + 9 * size) - (size / 30), yOff, size / 15, size * 9);
@@ -50,6 +59,19 @@ public class Board implements MouseListener{
 		}
 	}
 
+	public int get(int x, int y){
+		return board.get(x).get(y);
+	}
+	
+	public void set(int x, int y, int value){
+		board.get(x).set(y, value);
+		set.add(x + "," + y);
+	}
+	
+	public void setNotRed(int x, int y, int value){
+		board.get(x).set(y, value);
+	}
+	
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 	}
@@ -84,10 +106,6 @@ public class Board implements MouseListener{
 				}
 			}
 		}
-	}
-	
-	public void solve(){
-		
 	}
 	
 }

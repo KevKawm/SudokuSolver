@@ -2,12 +2,14 @@ package com.webs.kevkawmcode.SudokuSolver.Solver;
 
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import com.webs.kevkawmcode.SudokuSolver.Display;
 
-public class Selector implements MouseListener {
+public class Selector implements MouseListener, KeyListener{
 
 	public int selected = 0;
 
@@ -63,5 +65,24 @@ public class Selector implements MouseListener {
 				}
 			}
 		}
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {	
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		int i = -1;
+		try{
+			i = Integer.parseInt(Character.toString(e.getKeyChar()));
+		} catch (Exception ex){
+		}
+		if(i != -1) 
+			selected = i;
 	}
 }
