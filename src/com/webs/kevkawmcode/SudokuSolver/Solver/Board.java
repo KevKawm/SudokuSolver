@@ -108,4 +108,18 @@ public class Board implements MouseListener{
 		}
 	}
 	
+	public boolean isFilled(int x, int y){
+		return get(x,y) != 0;
+	}
+	
+	public boolean isSolved(){
+		for(int x = 0; x < 9; x++){
+			for(int y = 0; y < 9; y++){
+				if(!isFilled(x,y))
+					return false;
+			}
+		}
+		return true;
+	}
+	
 }

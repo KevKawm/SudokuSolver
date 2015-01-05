@@ -1,9 +1,39 @@
 package com.webs.kevkawmcode.SudokuSolver.Solver;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Solver {
+
+	public static void backtrackSolve(Board b) {
+		List<Point> prev = new ArrayList<Point>();
+		for (int x = 0; x < 9; x++) {
+			for (int y = 0; y < 9; y++) {
+				if (!b.isFilled(x, y)) {
+					for (int i = b.get(x, y) + 1; i <= 10; i++) {
+						System.out.println(x + "," + y + "," + i);
+						if (i == 10) {
+							b.setNotRed(x, y, 0);
+							Point prevP = prev.get(prev.size() - 1);
+							x = prevP.x;
+							y = prevP.y;
+							prev.remove(prev.size() - 1);
+							i = b.get(x, y);
+						} else if (isPossible(b, x, y, i)) {
+							prev.add(new Point(x, y));
+							b.set(x, y, i);
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public static boolean isPossible(Board b, int x, int y, int i) {
+		return findPoss(b, x, y).contains(i);
+	}
 
 	public static void solve(Board b) {
 		// Set up possibilities list
@@ -11,76 +41,27 @@ public class Solver {
 		updatePoss(poss, b);
 
 		// Find values
-		boolean foundOthers = true;
-		while (foundOthers) {
-			foundOthers = false;
-			// Find value using only possibility
-			boolean found = true;
-			while (found) {
-				found = false;
-				for (int x = 0; x < 9; x++) {
-					for (int y = 0; y < 9; y++) {
-						List<Integer> list = poss.get(x).get(y);
-						if (list.size() == 1 && b.get(x, y) == 0) {
-							b.set(x, y, list.get(0));
-							updatePoss(poss, b);
-							found = true;
-						}
-					}
-				}
-			}
-
-			// Find value looking at other tiles
+		// Find value using only possibility
+		boolean found = true;
+		while (found) {
+			found = false;
+			System.out.println("Finding");
 			for (int x = 0; x < 9; x++) {
 				for (int y = 0; y < 9; y++) {
 					List<Integer> list = poss.get(x).get(y);
-					for (int i : list) {
-						// Check row
-						/*boolean row = true;
-						for (int x1 = 0; x1 < 9; x1++) {
-							if(b.get(x1, y) == 0 && poss.get(x1).get(y).contains(i) && x1 != x){
-								row = false;
-								break;
-							}
-						}
-						
-						// Check Column
-						boolean column = true;
-						for (int y1 = 0; y1 < 9; y1++) {
-							if(b.get(x, y1) == 0 && poss.get(x).get(y1).contains(i) && y1 != y){
-								column = false;
-								break;
-							}
-						}*/
-						
-						// Check square
-						boolean square = true;
-						int squareX = (int) (Math.ceil((((double) x) + 1) / 3) - 1);
-						int squareY = (int) (Math.ceil((((double) y) + 1) / 3) - 1);
-						int posX = squareX * 3;
-						int posY = squareY * 3;
-						for (int x1 = posX; x1 < posX + 3; x1++) {
-							for (int y1 = posY; y1 < posY + 3; y1++) {
-								if(poss.get(x1).get(y1).contains(i) && x1 != x && y1 != y){
-									System.out.println(x1 + "," + y1 + " Found");
-									square = false;
-									break;
-								}
-							}
-						}
-						
-						// TODO FIX THIS
-						
-						foundOthers = /*row || column ||*/ square;
-						if(foundOthers){
-							System.out.println("Found");
-							b.set(x,y,i);
-							updatePoss(poss,b);
-							break;
-						}
+					if (list.size() == 1 && b.get(x, y) == 0) {
+						b.set(x, y, list.get(0));
+						updatePoss(poss, b);
+						found = true;
 					}
 				}
 			}
+		}
+
+		System.out.println("bts");
+		
+		if(!b.isSolved()){ 
+			backtrackSolve(b);
 		}
 	}
 

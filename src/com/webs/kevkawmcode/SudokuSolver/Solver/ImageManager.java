@@ -23,4 +23,8 @@ public class ImageManager {
 		}
 	}
 	
+	public static Image getIcon(){
+		return new ImageIcon(cl.getResource("com/webs/kevkawmcode/SudokuSolver/Assets/icon.png")).getImage();
+	}
+	
 }

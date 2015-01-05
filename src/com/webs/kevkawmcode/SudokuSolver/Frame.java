@@ -2,6 +2,8 @@ package com.webs.kevkawmcode.SudokuSolver;
 
 import javax.swing.JFrame;
 
+import com.webs.kevkawmcode.SudokuSolver.Solver.ImageManager;
+
 public class Frame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
@@ -24,6 +26,7 @@ public class Frame extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.addKeyListener(display);
+		this.setIconImage(ImageManager.getIcon());
 	}
 
 }
